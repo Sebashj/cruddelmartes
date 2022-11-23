@@ -15,6 +15,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import Dao.Daoprovedor;
 import Modelo.Provedor;
 
@@ -26,6 +30,9 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.awt.Toolkit;
 import javax.swing.JComboBox;
 import javax.swing.ComboBoxModel;
@@ -54,6 +61,7 @@ public class vProvedor extends JFrame {
 	private JLabel lblNewLabel_2;
 	private JTextField txtprecio;
 	private JTextField txtcantidad;
+	private JButton btnPdf;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -79,7 +87,7 @@ public class vProvedor extends JFrame {
 		setLocationRelativeTo(null);
 		setTitle("CRUDProvedor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 435, 463);
+		setBounds(100, 100, 565, 463);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -214,7 +222,7 @@ public class vProvedor extends JFrame {
 		contentPane.add(btnEditar);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 173, 398, 238);
+		scrollPane.setBounds(10, 173, 513, 238);
 		contentPane.add(scrollPane);
 		
 		tblProvedor = new JTable();
@@ -266,6 +274,27 @@ public class vProvedor extends JFrame {
 		txtcantidad.setColumns(10);
 		txtcantidad.setBounds(297, 83, 86, 20);
 		contentPane.add(txtcantidad);
+		
+		btnPdf = new JButton("PDF");
+		btnPdf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+				FileOutputStream archivo;
+				File file = new File("C:/Users/sdeba/git/cruddelmartes/crudprovedor/src/PDF/provedor.pdf");
+				archivo = new FileOutputStream(file);
+				Document doc=new Document();
+				PdfWriter.getInstance(doc, archivo);
+				doc.open();
+				Image img Image.getInstance("C:/Users/sdeba/git/cruddelmartes/crudprovedor/src/Img/s14.webp");  
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (DocumentException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnPdf.setBounds(425, 141, 89, 23);
+		contentPane.add(btnPdf);
 		refrescarTabla();
 	}
 	public void refrescarTabla() {

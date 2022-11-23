@@ -75,7 +75,7 @@ public class Daoprovedor {
 	public boolean editarprovedor(Provedor user) {
 		PreparedStatement ps=null;
 		try {
-			ps=cx.conectar().prepareStatement("UPDATE Provedor SET Marca=?, Modelo=?, Precio=?, Cantidad=?  WHERE idprovedor=?");
+			ps=cx.conectar().prepareStatement("UPDATE Provedor SET marca=?, modelo=?, precio=?, cantidad=?  WHERE idprovedor=?");
 			ps.setString(1, user.getMarca());
 			ps.setString(2, user.getModelo());
 			ps.setDouble(3, user.getPrecio());
